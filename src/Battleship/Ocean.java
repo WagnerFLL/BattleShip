@@ -37,6 +37,11 @@ public class Ocean extends JPanel {
     private int moveNum = 0;
     private int toggleNum = 0;
     private ActionListener ButtonListener;
+    private EmptySeaPrototype emptySeaPrototype = new EmptySeaPrototype(0);
+    private CruiserPrototype cruiserPrototype = new CruiserPrototype(0);
+    private BattleshipPrototype battleshipPrototype = new BattleshipPrototype(0);
+    private DestroyerPrototype destroyerPrototype = new DestroyerPrototype(0);
+    private SubmarinePrototype submarinePrototype = new SubmarinePrototype(0);
 
     public Ocean() {
 
@@ -167,7 +172,7 @@ public class Ocean extends JPanel {
         ships = new Ship[10][10];
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                ships[i][j] = new EmptySea(0);
+                ships[i][j] = new EmptySeaPrototype(0);
             }
         }
 
@@ -179,7 +184,7 @@ public class Ocean extends JPanel {
 
     //Generates random coordinates and orientations to try until all ships are placed
     public void placeAllShipsRandomly() {
-        Battleship bb = new Battleship(1);
+        BattleshipPrototype bb = (BattleshipPrototype) battleshipPrototype.clonar(1);
         int[] shipCoords = generateOkCoords(bb, 4);
         int placementX = shipCoords[0];
         int placementY = shipCoords[1];
@@ -191,7 +196,7 @@ public class Ocean extends JPanel {
         //battleship placed
 
         for (int i = 0; i < 2; i++) {
-            Cruiser cc = new Cruiser(i + 1);
+            CruiserPrototype cc = (CruiserPrototype) cruiserPrototype.clonar(i + 1);
             shipCoords = generateOkCoords(cc, 3);
             placementX = shipCoords[0];
             placementY = shipCoords[1];
@@ -204,7 +209,7 @@ public class Ocean extends JPanel {
         }
         //Cruisers placed
         for (int i = 0; i < 3; i++) {
-            Destroyer dd = new Destroyer(i + 1);
+            DestroyerPrototype dd = (DestroyerPrototype) destroyerPrototype.clonar(i + 1);
             shipCoords = generateOkCoords(dd, 2);
             placementX = shipCoords[0];
             placementY = shipCoords[1];
@@ -218,7 +223,7 @@ public class Ocean extends JPanel {
         //Destroyers placed
 
         for (int i = 0; i < 4; i++) {
-            Submarine sub = new Submarine(i + 1);
+            SubmarinePrototype sub = (SubmarinePrototype) submarinePrototype.clonar(i + 1);
             shipCoords = generateOkCoords(sub, 1);
             placementX = shipCoords[0];
             placementY = shipCoords[1];
@@ -416,7 +421,7 @@ public class Ocean extends JPanel {
                     disableCheatMode();
                     for (int i = 0; i < 10; i++) {
                         for (int j = 0; j < 10; j++) {
-                            ships[i][j] = new EmptySea(0);
+                            ships[i][j] = new EmptySeaPrototype(0);
                             if (!buttons[i][j].isEnabled()) {
                                 buttons[i][j].setEnabled(true);
                             }
@@ -435,7 +440,7 @@ public class Ocean extends JPanel {
                 disableCheatMode();
                 for (int i = 0; i < 10; i++) {
                     for (int j = 0; j < 10; j++) {
-                        ships[i][j] = new EmptySea(0);
+                        ships[i][j] = new EmptySeaPrototype(0);
                         if (!buttons[i][j].isEnabled()) {
                             buttons[i][j].setEnabled(true);
                         }

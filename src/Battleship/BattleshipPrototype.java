@@ -4,27 +4,35 @@ package Battleship;
  *
  * @author Max Cowan and Sam Uribe. October 2016
  */
-public class Destroyer extends Ship {
+public class BattleshipPrototype extends Ship {
 
-    public Destroyer(int IDNum) {
-        super(2, IDNum);
+    public BattleshipPrototype(int IDNum) {
+        super(4, IDNum);
+    }
 
+    protected BattleshipPrototype(BattleshipPrototype battleshipPrototype, int IDNum){
+        super(4, IDNum);
+    }
+
+    @Override
+    public Ship clonar(int IDNum) {
+        return new BattleshipPrototype(this,IDNum);
     }
 
     @Override
     public String getShipType() {
-        return "destroyer";
+        return "battleship";
     }
 
     @Override
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-        if (row < 1 || column < 1) {
+        if (row < 3 || column < 3) {
             return false;
         }
         if (horizontal) {
-            for (int i = column - 2; i < column + 2; i++) {
+            for (int i = column - 1; i < column + 2; i++) {
 
-                for (int j = row - 1; j < row + 2; j++) {
+                for (int j = row - 4; j < row + 2; j++) {
 
                     if (j > -1 && j < 10 && i > -1 && i < 10 && ocean.isOccupied(j, i)) {
                         return false;
@@ -32,9 +40,9 @@ public class Destroyer extends Ship {
                 }
             }
         } else {
-            for (int i = row - 2; i < row + 2; i++) {
+            for (int i = row - 1; i < row + 2; i++) {
 
-                for (int j = column - 1; j < column + 2; j++) {
+                for (int j = column - 4; j < column + 2; j++) {
 
                     if (j > -1 && j < 10 && i > -1 && i < 10 && ocean.isOccupied(i, j)) {
                         return false;
@@ -51,12 +59,12 @@ public class Destroyer extends Ship {
         setBowColumn(column);
         setHorizontal(h);
         if (h) {
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 4; i++) {
                 ocean.setShips(row, column - i, this);
                 setIndividualCoords(row, column - i);
             }
         } else {
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 4; i++) {
                 ocean.setShips(row - i, column, this);
                 setIndividualCoords(row - i, column);
             }

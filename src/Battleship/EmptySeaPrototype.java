@@ -4,10 +4,19 @@ package Battleship;
  *
  * @author Max Cowan and Sam Uribe. October 2016
  */
-public class EmptySea extends Ship {
+public class EmptySeaPrototype extends Ship {
 
-    public EmptySea(int IDNum) {
+    public EmptySeaPrototype(int IDNum) {
         super(1, IDNum);
+    }
+
+    protected EmptySeaPrototype(EmptySeaPrototype emptySeaPrototype, int IDNum){
+        super(1, IDNum);
+    }
+
+    @Override
+    public Ship clonar(int IDNum) {
+        return new EmptySeaPrototype(this,IDNum);
     }
 
     @Override

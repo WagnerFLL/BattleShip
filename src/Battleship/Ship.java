@@ -26,6 +26,8 @@ public abstract class Ship implements ShipAction {
         }
     }
 
+    public abstract Ship clonar(int IDNum);
+
     public void setIndividualCoords(int row, int column) {
         individualCoords.add(row);
         individualCoords.add(column);

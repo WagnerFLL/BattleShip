@@ -4,12 +4,21 @@ package Battleship;
  *
  * @author Max Cowan and Sam Uribe. October 2016
  */
-public class Submarine extends Ship {
+public class SubmarinePrototype extends Ship {
 
     private int shipID;
 
-    public Submarine(int IDNum) {
+    public SubmarinePrototype(int IDNum) {
         super(1, IDNum);
+    }
+
+    protected SubmarinePrototype(SubmarinePrototype submarinePrototype, int IDNum){
+        super(1, IDNum);
+    }
+
+    @Override
+    public Ship clonar(int IDNum) {
+        return new SubmarinePrototype(this,IDNum);
     }
 
     @Override
@@ -60,4 +69,6 @@ public class Submarine extends Ship {
             }
         }
     }
+
+
 }
